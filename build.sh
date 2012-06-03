@@ -2,7 +2,7 @@
 
 if [ "$1" == "build" ]; then
     echo "Building problem"$2
-    ghc problem$2
+    ghc -O2 -threaded -rtsopts problem$2
 elif [ "$1" == "clean" ]; then
     echo "Cleaning problem"$2
     rm problem$2 problem$2.hi problem$2.o
