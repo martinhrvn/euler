@@ -106,9 +106,9 @@ a = [[59]
 
 --processRow :: 
 processRow ([]) = []
-processRow (x:y:[]) = (max x y):[]
-processRow (x:y:xs) = (max x y):(processRow (y:xs))
-processRow (y:[]) = y:[]
+processRow (x:y:[]) = [max x y]
+processRow (x:y:xs) = max x y : processRow (y:xs)
+processRow (y:[]) = [y]
 
 processTriangle (x:y:[]) = zipWith (+) x (processRow y)
 processTriangle (x:xs) = zipWith (+) x (processRow (processTriangle xs))

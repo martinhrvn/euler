@@ -4,5 +4,5 @@ gcd' n m
     | n >  m = gcd' (n-m) m
     | n <  m = gcd' n (m-n)
 
-problem05 = foldl (lcm') 1 [1..20]
-main = print( problem05 )
+problem05 = foldl lcm' 1 [1..20]
+main = print problem05 

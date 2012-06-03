@@ -5,7 +5,7 @@ isPrime n = fst (head (divisors n)) == 1
 sqr :: Integer -> Integer
 sqr n = floor (sqrt (fromInteger n))
 
-divisors n = [(x,n `div` x) | x<-[sqr n, (sqr n) - 1..1], n `mod` x == 0] 
+divisors n = [(x,n `div` x) | x<-[sqr n, sqr n - 1..1], n `mod` x == 0] 
 
 main = print (maximum (primeFactors 600851475143))
 
