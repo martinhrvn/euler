@@ -15,19 +15,17 @@ parseHand s = map L.sort ([take 5 (processHand s)]++[drop 5 (processHand s)])
 evaluateHand h
     | isRoyalFlush h = 9000
     | isStraightFlush h = 8000 + fst (head h)
-    | isFourOfAKind h = 7000 + fokValue h
-    | isFullHouse h = 6000 + fullHouseValue h
+    | isFourOfAKind h = 7000 + val h 4
+    | isFullHouse h = 6000 + val h 3
     | isFlush h = 5000 + fst (last h)
     | isStraight h = 4000 + fst (head h)
-    | isThreeOfKind h = 3000 + tokValue h
+    | isThreeOfKind h = 3000 + val h 3
     | isTwoPairs h = 2000 + twoPairsValue h
-    | isPair h = 1000 + pairValue h 
+    | isPair h = 1000 + val h 2
     | otherwise = fst (last h)
     where
         isPair h = cont h 2 2
-        pairValue h = val h 2
         isThreeOfKind h = cont h 3 3
-        tokValue h = val h 3
         isTwoPairs h = cont h 2 4
         isStraight h = and $ zipWith (\x y -> y == succ x) (extractVal h) (tail $ extractVal h)
         twoPairsValue h = fst (last (L.sort (filterCards h 2))) * 20 + fst (head (L.sort (filterCards h 2)))
@@ -35,17 +33,11 @@ evaluateHand h
         extractSuit h = map snd h
         isFlush h = 1 == (length . L.group $ extractSuit h)
         isFullHouse h = length (filterCards h 3) == 3 && length (filterCards h 2) == 2
-        fullHouseValue h = val h 3
         isFourOfAKind h = cont h 4 4 
-        fokValue h = val h 4
         isStraightFlush h = isStraight h && isFlush h
         isRoyalFlush h = isStraightFlush h && fst (last h) == 14
         val h n = fst . head $ filterCards h n
         cont h n a = length (filterCards h n) == a
---    | isRoyalFlush h = 1000
---    | isStraightFlush h = 900 + value (fst (head h))
---    | isFourOfAKind h = 800 + value(fst (head h))
---    | isFullHouse h = 700 + value(fst (head h))
 
 filterCards h n = concat (filter (\x -> length x == n) (groupCards h))
 
