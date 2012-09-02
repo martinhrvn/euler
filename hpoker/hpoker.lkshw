@@ -1,0 +1,10 @@
+Version of workspace file format:
+               1
+Time of storage:
+               "Mon Sep  3 00:18:46 CEST 2012"
+Name of the workspace:
+               "hpoker"
+File paths of contained packages:
+               ["hpoker/src/HandsTest.hs","hpoker/hpoker.cabal"]
+Maybe file path of an active package:
+               Just "hpoker/src/HandsTest.hs"

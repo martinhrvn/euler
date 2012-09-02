@@ -1,0 +1,26 @@
+name: hpoker
+version: 0.0.1
+cabal-version: >=1.2
+build-type: Simple
+license: AllRightsReserved
+license-file: ""
+description: poker library and hand evaluator
+data-dir: ""
+extra-source-files: /home/kane/proj/hpoker/hpoker/src/Cards.hs
+ 
+executable hpoker
+    build-depends: QuickCheck -any, base -any, containers -any,
+                   random -any
+    main-is: Main.hs
+    buildable: True
+    hs-source-dirs: src
+    other-modules: Tests Cards Hands HandsTest
+ 
+test-suite test-hpoker
+    build-depends: QuickCheck -any, base -any, containers -any,
+                   random -any
+    type: exitcode-stdio-1.0
+    main-is: Main.hs
+    buildable: True
+    cpp-options: -DMAIN_FUNCTION=testMain
+    hs-source-dirs: src

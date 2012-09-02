@@ -1,5 +1,8 @@
 import Euler.Helpers
 import qualified Data.List as L
+import Control.Applicative
+
+diagonals = scanl1 (+) (1 : liftA2 (*) (map (*2) [1..]) [1,1,1,1])
 takeWhileArr f xs = takeWhileF f [] xs
     where
         takeWhileF f rs [] = reverse rs
@@ -9,10 +12,10 @@ takeWhileArr f xs = takeWhileF f [] xs
 
 over10P = takeWhileArr o10pp (map isPrime diagonals)
     where 
-        o10pp xs 
-            | null xs = False
-            | (length xs - 1) `mod` 4 == 0 = fromIntegral (length . head $ grps xs) / fromIntegral (length xs) < 0.1       
+        o10pp rs 
+            | null rs = False
+            | length rs > 1 && (length rs - 1) `mod` 4 == 0 = fromIntegral (length . head $ grps rs) / fromIntegral (length rs) < 0.9       
             | otherwise = True
         grps = L.group . L.sort
 
-main = print ( length ( head ( L.group (L.sort (take 100 (map isPrime diagonals))))))
+main = print . length $ over10P

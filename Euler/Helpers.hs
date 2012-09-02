@@ -17,7 +17,7 @@ fromDigits [] = 0
 fromDigits xs = foldr1 d (reverse xs)
     where d a b = a + b*10
 primes = 2:[x|x<-[3,5..], isPrime x]
-isPrime n = fst (head (divisors n)) == 1
+isPrime n = n >1 && fst (head (divisors n)) == 1
 sqr n = floor (sqrt (fromInteger n))
 isPalindrome n = n == reverse n
 isPalindromeNum n = isPalindrome $ toDigits n
